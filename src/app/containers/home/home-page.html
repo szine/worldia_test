@@ -1,0 +1,98 @@
+
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" title="HOME" style="font-size:20px"><span>Worldia</span> | voyage sur mesure</a>
+			</div> <!-- /.navbar-header -->
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="index.html">Home</a></li>
+				</ul> <!-- /.nav -->
+		    </div><!-- /.navbar-collapse -->
+	  	</div><!-- /.container -->
+	</nav>
+
+		<!-- Home -->
+		<div id="header">
+
+
+			<swiper class="swiper swiper-container" [config]="config">
+			  <div *ngFor="let area of (areas$ | async).slice(0,5)" class="slider-item" [style.background-image]="'url(https://cdn.worldia.com/cache/bgimage_lg/' + area.thumbnail.path +')'" style="background-size: cover;">
+			  	<div style="background: rgba(0,0,0,0.5)">
+	                <div class="intro container">
+	                    <div class="inner-intro">
+	                        <h1 class="header-title">
+	                           {{area.name}} : {{area.catchPhrase}}
+	                        </h1>
+	                        <p class="header-sub-title">
+	                            {{area.description}}
+	                        </p>
+	                        <a class="btn custom-btn" (click)="goToArea(area.id)" md-raised-button routerLink="/trips">Choisir cette destination</a>
+	                    </div>
+	                </div>
+	            </div> 
+			  </div>
+			</swiper>
+
+
+
+		</div> <!-- /#header -->
+<!-- Find a Tour -->
+	<section class="tour section-wrapper container">
+		<h2 class="section-title">
+			Planifiez un voyage à votre image
+		</h2>
+
+		<div class="row">
+
+			<div class="col-md-3 col-md-offset-3 col-sm-6">
+				<form role="form">
+					<div style="margin-top:10px">
+						<md-select style="width:100%" [(ngModel)]="selectedArea" placeholder="Selectionnez un itinéraire" name="area">
+						   <md-option [value]="'all'">Toutes les zones</md-option>
+						   <md-option *ngFor="let area of (areas$ | async)" [value]="area.id">{{ area.name }}</md-option>
+						</md-select>
+					</div>
+				</form>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div (click)="goToArea(selectedArea)" class="btn btn-default border-radius custom-button">
+					Rechercher
+				</div>
+			</div>
+		</div>
+	</section> <!-- /.tour -->
+		
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="text-left">
+						&copy; Copyright Smez
+					</div>
+				</div>
+				<div class="col-xs-4">
+					Angular Theme by Samy for Worldia
+				</div>
+				<div class="col-xs-4">
+					<div class="top">
+						<a href="#header">
+							<i class="ion-arrow-up-b"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</footer>
+
